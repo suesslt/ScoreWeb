@@ -28,7 +28,7 @@ copies; auth building blocks live in `ScorewareAuthVapor`.
 ## Usage
 
 ```swift
-.package(url: "https://github.com/suesslt/ScoreWeb.git", from: "1.0.0")
+.package(url: "https://github.com/suesslt/ScoreWeb.git", from: "1.1.0")
 ```
 
 ```swift
@@ -36,7 +36,7 @@ app.middleware.use(SecurityHeadersMiddleware(sendHSTS: app.environment == .produ
 app.middleware.use(DomainErrorMiddleware(userMessage: { req, error in ... }))
 app.webTranslations = try WebTranslations(path: ..., merging: packageTable)
 app.leaf.tags["t"] = TranslationTag(translations: app.webTranslations)
-try sources.register(source: "scoreweb", using: ScoreWeb.leafSource(app), searchable: true)
+try sources.register(source: "scoreweb", using: ScoreWebResources.leafSource(app), searchable: true)
 ```
 
 Internal *infrastructure* library (LIBRARIES.md §2.12): lives in web/transport/

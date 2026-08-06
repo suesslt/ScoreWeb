@@ -9,13 +9,13 @@ import Vapor
 /// ```swift
 /// let sources = LeafSources()
 /// try sources.register(source: "host", using: NIOLeafFiles(...), searchable: true)
-/// try sources.register(source: "scoreweb", using: ScoreWeb.leafSource(app), searchable: true)
+/// try sources.register(source: "scoreweb", using: ScoreWebResources.leafSource(app), searchable: true)
 /// app.leaf.sources = sources
 /// ```
-public enum ScoreWeb {
+public enum ScoreWebResources {
     public static func leafSource(_ app: Application) throws -> any LeafSource {
         guard let path = Bundle.module.resourcePath else {
-            throw Abort(.internalServerError, reason: "ScoreWeb: Ressourcenpfad fehlt.")
+            throw Abort(.internalServerError, reason: "ScoreWebResources: Ressourcenpfad fehlt.")
         }
         let views = path + "/Views/"
         // OHNE `.toVisibleFiles`: der Bundle-Pfad liegt im Debug-Build unter

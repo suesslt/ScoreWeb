@@ -41,14 +41,27 @@ public struct DatabaseEnvConfig: Sendable {
         self.useTLS = useTLS
     }
 
-    public static func fromEnvironment() throws -> DatabaseEnvConfig {
-        DatabaseEnvConfig(
+    /// `DATABASE_URL` (postgres://…) hat Vorrang und wird in die Einzelwerte
+    /// zerlegt (viele Hyperscaler liefern diese Form — ARCH §11.3); sonst die
+    /// `DATABASE_*`-Einzelvariablen, fail-fast.
+    /// - Parameter defaultTLS: TLS-Default, wenn `DATABASE_TLS` fehlt (ARCH: `true`;
+    ///   Wirte mit historisch anderem Default übergeben ihn explizit).
+    public static func fromEnvironment(defaultTLS: Bool = true) throws -> DatabaseEnvConfig {
+        let useTLS = Environment.get("DATABASE_TLS").map { $0 == "true" } ?? defaultTLS
+        if let raw = Environment.get("DATABASE_URL"), let url = URL(string: raw) {
+            return DatabaseEnvConfig(
+                host: url.host ?? "localhost", port: url.port ?? 5432,
+                name: String(url.path.dropFirst()),
+                user: url.user ?? "", password: url.password ?? "",
+                useTLS: useTLS)
+        }
+        return DatabaseEnvConfig(
             host: try WebEnvironment.require("DATABASE_HOST"),
             port: Environment.get("DATABASE_PORT").flatMap(Int.init) ?? 5432,
             name: try WebEnvironment.require("DATABASE_NAME"),
             user: try WebEnvironment.require("DATABASE_USER"),
             password: try WebEnvironment.require("DATABASE_PASSWORD"),
-            useTLS: Environment.get("DATABASE_TLS").map { $0 == "true" } ?? true)
+            useTLS: useTLS)
     }
 }
 
