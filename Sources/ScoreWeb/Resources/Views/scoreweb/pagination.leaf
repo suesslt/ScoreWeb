@@ -1,0 +1,15 @@
+#if(pageInfo.pageCount > 1):
+<nav class="pagination" aria-label="Pagination">
+    #if(pageInfo.hasPrev):
+    <a href="#(pageInfo.path)?page=#(pageInfo.prev)&#(pageInfo.query)">#(pageInfo.previousLabel)</a>
+    #else:
+    <span class="disabled">#(pageInfo.previousLabel)</span>
+    #endif
+    <span class="page-of">#(pageInfo.pageOfText)</span>
+    #if(pageInfo.hasNext):
+    <a href="#(pageInfo.path)?page=#(pageInfo.next)&#(pageInfo.query)">#(pageInfo.nextLabel)</a>
+    #else:
+    <span class="disabled">#(pageInfo.nextLabel)</span>
+    #endif
+</nav>
+#endif
