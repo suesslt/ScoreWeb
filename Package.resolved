@@ -1,5 +1,5 @@
 {
-  "originHash" : "50e652485815cf5b479adbc960af6f025c74a682d8f20bd15a174e0a85a7de58",
+  "originHash" : "0478bf3ae9d34a6736b739a6187a866cb85911ecdeac65d11e435dfa9e21d13f",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "32ad16dfc7677b927b225595ed18f3debb32f577",
         "version" : "4.16.0"
+      }
+    },
+    {
+      "identity" : "grdb.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/groue/GRDB.swift",
+      "state" : {
+        "revision" : "92a554cd0d5e8d67cb18993c6054e73fe42c066c",
+        "version" : "7.12.0"
       }
     },
     {
@@ -69,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/suesslt/score.git",
       "state" : {
-        "revision" : "af3719ca7478feaa777c01d04fde797d6d26740d",
-        "version" : "2.0.0"
+        "revision" : "9b3a36be660dab858ac90d0d0fff3fe72730bb50",
+        "version" : "3.0.0"
       }
     },
     {
